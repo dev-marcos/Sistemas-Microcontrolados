@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "u10a_tim2_irq_estouro_blink_led"
+		},
+		{
+			"path": "u10b_tim2_pwm_led"
+		},
+		{
+			"path": "u10c_tim2_pwm_servomotor"
+		},
+		{
+			"path": "u10d_tim2_captura_sonar"
+		},
+		{
+			"path": "u10e_tim2_contagem_rotacao"
+		}
+	],
+	"settings": {}
+}
