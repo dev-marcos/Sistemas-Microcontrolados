@@ -53,8 +53,8 @@ void GPIO_Configuration(void) {
     GPIOC->CRH = (GPIOC->CRH & ~(GPIO_CRH_MODE13_Msk | GPIO_CRH_CNF13_Msk)) | (0b0110 << GPIO_CRH_MODE13_Pos); 
     
     
-    //0b0010 = 2 ->
-    //0b1000 = 8 -> 
+    //0b0010 = 2 -> Saída de uso geral, Push-pull
+    //0b1000 = 8 -> Entrada com resistor pull-down
     GPIOA->CRL = 0x44422248; // PA0 - IN   PA2~PA4 - LED (Vermelho, Amarelo, Verde)
     GPIOA->ODR |= GPIO_ODR_ODR0;    // PA0 como entrada e com resistor de pull-up interno
 
@@ -79,8 +79,6 @@ int main(void){ /* Funcao principal */
     GPIOA->ODR |= (1<<2);
     GPIOA->ODR |= (1<<3);
 
-
-
     /* Config PAO com interrupção no EXTI0*/
     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
     AFIO->EXTICR[0] = AFIO_EXTICR1_EXTI0_PA;        // Seleciona PA0 para EXTI0
@@ -98,7 +96,7 @@ int main(void){ /* Funcao principal */
             
             // Espera por 3 segundos
             delay_ms(300);
-
+            
             // Apaga o LED verde (PA4)
             GPIOA->ODR ^= (1<<4);
 
@@ -124,7 +122,7 @@ int main(void){ /* Funcao principal */
 
             pedestre = 0;
 
-            // Hab. a int. do EXTI0 a EXTI3
+            // Hab. a int. do EXTI0
             EXTI->IMR |= EXTI_IMR_IM0; 
         }
     }
